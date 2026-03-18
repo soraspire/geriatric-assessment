@@ -57,6 +57,7 @@ class AssessmentService
             'mna' => $data['mna'] ?? [],
             'cfs' => $data['cfs'] ?? [],
             'morse' => $data['morse'] ?? [],
+            'other' => $data['other'] ?? [],
         ];
     }
 
@@ -77,7 +78,7 @@ class AssessmentService
         return [
             'cci' => [
                 'score' => $cciScore,
-                'max' => 15,
+                'max' => 34,
                 'interpretation' => $cciInterpretation,
                 'is_risk' => $cciScore > 0,
                 'status' => $cciScore > 0 ? "Đa bệnh lý" : "Bình thường"
@@ -101,14 +102,14 @@ class AssessmentService
             'cfs' => [
                 'score' => $assessment->cfs_total_score ?? 1,
                 'max' => 9,
-                'normal' => '<=4',
+                'normal' => '<4',
                 'interpretation' => ($assessment->cfs_total_score >= 7) ? "Suy yếu nặng" : (($assessment->cfs_total_score >= 5) ? "Nhẹ đến vừa" : "Không suy yếu"),
                 'is_risk' => ($assessment->cfs_total_score > 4),
                 'status' => ($assessment->cfs_total_score > 4) ? "Có nguy cơ suy giảm chức năng" : "Bình thường"
             ],
             'morse' => [
                 'score' => $assessment->morse_total_score ?? 0,
-                'max' => 115,
+                'max' => 125,
                 'normal' => '<24',
                 'interpretation' => ($assessment->morse_total_score >= 45) ? "Nguy cơ ngã cao" : (($assessment->morse_total_score >= 25) ? "Nguy cơ ngã trung bình" : "Nguy cơ ngã thấp"),
                 'is_risk' => ($assessment->morse_total_score >= 25),

@@ -110,6 +110,24 @@
                 <p><strong>Nghề nghiệp:</strong> {{ $assessment->previous_job ?? 'N/A' }}</p>
                 <p><strong>BMI:</strong> {{ $assessment->bmi }}</p>
             </div>
+            @auth
+            <div class="patient-info" style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 15px;">
+                @if($assessment->otherDetail)
+                    <p><strong>Dị ứng thuốc:</strong> 
+                        {{ $assessment->otherDetail->has_drug_allergy ? 'Có' : 'Không' }}
+                        @if($assessment->otherDetail->has_drug_allergy)
+                            ({{ $assessment->otherDetail->drug_allergy_detail }})
+                        @endif
+                    </p>
+                    <p><strong>Giác quan:</strong> {{ $assessment->otherDetail->has_sensory_impairment ? 'Có' : 'Không' }}</p>
+                    <p><strong>Tiểu không tự chủ:</strong> {{ $assessment->otherDetail->has_incontinence ? 'Có' : 'Không' }}</p>
+                    <p><strong>Nguy cơ loét:</strong> {{ $assessment->otherDetail->has_pressure_ulcer_risk ? 'Có' : 'Không' }}</p>
+                    <p><strong>Người chăm sóc:</strong> {{ $assessment->otherDetail->has_caregiver ? 'Có' : 'Không' }}</p>
+                @else
+                    <p><em>Không có thông tin bổ sung.</em></p>
+                @endif
+            </div>
+            @endauth
 
             <h2>KẾT QUẢ TEST</h2>
             <table>
@@ -229,8 +247,6 @@
                     <p><strong>Kết luận:</strong> {{ $results['morse']['interpretation'] }}</p>
                 </div>
             </div>
-
-            <a href="{{ route('assessments.create') }}" class="btn">TẠO PHIẾU MỚI</a>
         </div>
     </div>
 </body>

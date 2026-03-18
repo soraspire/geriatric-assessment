@@ -197,6 +197,30 @@
             height: 220px;
         }
 
+        /* Other Details Table */
+        .other-details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .other-details-table td {
+            padding: 12px;
+            border: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .other-details-table tr:hover {
+            background-color: #f8fafc;
+        }
+        .check-icon {
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
         .grid-item input[type="checkbox"] {
             width: 18px;
             height: 18px;
@@ -377,6 +401,72 @@
                         <input type="number" step="0.1" id="bmi" name="main[bmi]" value="{{ old('main.bmi', '0') }}" class="@error('main.bmi') is-invalid @enderror" readonly>
                         @error('main.bmi') <div class="error-message">{{ $message }}</div> @enderror
                     </div>
+                </div>
+                <div class="question-list">
+                    <table class="other-details-table">
+                        <tr>
+                            <td style="width: 25%; font-weight: 600;"><span class="check-icon">✓</span> Dị ứng thuốc:</td>
+                            <td style="width: 45%;">Có tiền sử dị ứng thuốc hay không?</td>
+                            <td style="width: 30%;">
+                                <div class="radio-group @error('other.has_drug_allergy') is-invalid @enderror">
+                                    <label class="checkbox-item"><input type="radio" name="other[has_drug_allergy]" value="1" {{ old('other.has_drug_allergy') === '1' ? 'checked' : '' }}> Có</label>
+                                    <label class="checkbox-item"><input type="radio" name="other[has_drug_allergy]" value="0" {{ old('other.has_drug_allergy') === '0' ? 'checked' : '' }}> Không</label>
+                                </div>
+                                @error('other.has_drug_allergy') <div class="error-message">{{ $message }}</div> @enderror
+                            </td>
+                        </tr>
+                        <tr id="drug-allergy-detail-row" style="{{ old('other.has_drug_allergy') === '1' ? '' : 'display: none;' }}">
+                            <td colspan="2" style="text-align: right; padding-right: 20px; font-style: italic; color: var(--text-light);">Nếu có: loại thuốc dị ứng:</td>
+                            <td>
+                                <input type="text" name="other[drug_allergy_detail]" value="{{ old('other.drug_allergy_detail') }}" placeholder="Nhập tên thuốc..." style="width: 100%;" class="@error('other.drug_allergy_detail') is-invalid @enderror">
+                                @error('other.drug_allergy_detail') <div class="error-message">{{ $message }}</div> @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><span class="check-icon">✓</span> Giác quan:</td>
+                            <td>Nghe kém hoặc nhìn kém?</td>
+                            <td>
+                                <div class="radio-group @error('other.has_sensory_impairment') is-invalid @enderror">
+                                    <label class="checkbox-item"><input type="radio" name="other[has_sensory_impairment]" value="1" {{ old('other.has_sensory_impairment') === '1' ? 'checked' : '' }}> Có</label>
+                                    <label class="checkbox-item"><input type="radio" name="other[has_sensory_impairment]" value="0" {{ old('other.has_sensory_impairment') === '0' ? 'checked' : '' }}> Không</label>
+                                </div>
+                                @error('other.has_sensory_impairment') <div class="error-message">{{ $message }}</div> @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><span class="check-icon">✓</span> Tiểu không tự chủ:</td>
+                            <td>Khó kiểm soát tiểu tiện?</td>
+                            <td>
+                                <div class="radio-group @error('other.has_incontinence') is-invalid @enderror">
+                                    <label class="checkbox-item"><input type="radio" name="other[has_incontinence]" value="1" {{ old('other.has_incontinence') === '1' ? 'checked' : '' }}> Có</label>
+                                    <label class="checkbox-item"><input type="radio" name="other[has_incontinence]" value="0" {{ old('other.has_incontinence') === '0' ? 'checked' : '' }}> Không</label>
+                                </div>
+                                @error('other.has_incontinence') <div class="error-message">{{ $message }}</div> @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><span class="check-icon">✓</span> Nguy cơ loét:</td>
+                            <td>Hạn chế vận động, nằm nhiều hoặc đang loét?</td>
+                            <td>
+                                <div class="radio-group @error('other.has_pressure_ulcer_risk') is-invalid @enderror">
+                                    <label class="checkbox-item"><input type="radio" name="other[has_pressure_ulcer_risk]" value="1" {{ old('other.has_pressure_ulcer_risk') === '1' ? 'checked' : '' }}> Có</label>
+                                    <label class="checkbox-item"><input type="radio" name="other[has_pressure_ulcer_risk]" value="0" {{ old('other.has_pressure_ulcer_risk') === '0' ? 'checked' : '' }}> Không</label>
+                                </div>
+                                @error('other.has_pressure_ulcer_risk') <div class="error-message">{{ $message }}</div> @enderror
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;"><span class="check-icon">✓</span> Hoàn cảnh xã hội:</td>
+                            <td>Có người chăm sóc khi cần thiết?</td>
+                            <td>
+                                <div class="radio-group @error('other.has_caregiver') is-invalid @enderror">
+                                    <label class="checkbox-item"><input type="radio" name="other[has_caregiver]" value="1" {{ old('other.has_caregiver') === '1' ? 'checked' : '' }}> Có</label>
+                                    <label class="checkbox-item"><input type="radio" name="other[has_caregiver]" value="0" {{ old('other.has_caregiver') === '0' ? 'checked' : '' }}> Không</label>
+                                </div>
+                                @error('other.has_caregiver') <div class="error-message">{{ $message }}</div> @enderror
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
@@ -620,8 +710,6 @@
                 </div>
             </div>
 
-
-
             <button type="submit" class="btn">LƯU PHIẾU ĐÁNH GIÁ</button>
         </form>
     </div>
@@ -667,6 +755,20 @@
         btnShowMemory.addEventListener('click', function() {
             memoryContent.style.display = 'block';
             btnShowMemory.style.display = 'none';
+        });
+
+        // Drug allergy toggle
+        const drugAllergyRadios = document.querySelectorAll('input[name="other[has_drug_allergy]"]');
+        const drugAllergyRow = document.getElementById('drug-allergy-detail-row');
+        
+        drugAllergyRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === '1') {
+                    drugAllergyRow.style.display = 'table-row';
+                } else {
+                    drugAllergyRow.style.display = 'none';
+                }
+            });
         });
 
         // Auto-scroll to first validation error

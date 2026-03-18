@@ -78,4 +78,9 @@ class Assessment extends Model
     {
         return $this->hasOne(GDSDetail::class);
     }
+
+    public function otherDetail(): HasOne
+    {
+        return $this->hasOne(OtherDetail::class);
+    }
 }

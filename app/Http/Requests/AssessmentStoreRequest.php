@@ -63,6 +63,14 @@ class AssessmentStoreRequest extends FormRequest
             'morse.ho_tro_di_lai' => 'required|integer',
             'morse.bat_thuong_di_chuyen' => 'required|integer',
             'morse.tinh_trang_tinh_than' => 'required|integer',
+
+            // VII. Thông tin bổ sung
+            'other.has_drug_allergy' => 'required|in:0,1',
+            'other.drug_allergy_detail' => 'required_if:other.has_drug_allergy,1|nullable|string|max:255',
+            'other.has_sensory_impairment' => 'required|in:0,1',
+            'other.has_incontinence' => 'required|in:0,1',
+            'other.has_pressure_ulcer_risk' => 'required|in:0,1',
+            'other.has_caregiver' => 'required|in:0,1',
         ];
     }
 
@@ -97,6 +105,12 @@ class AssessmentStoreRequest extends FormRequest
             'morse.ho_tro_di_lai.required' => 'Vui lòng chọn hỗ trợ đi lại.',
             'morse.bat_thuong_di_chuyen.required' => 'Vui lòng chọn bất thường di chuyển.',
             'morse.tinh_trang_tinh_than.required' => 'Vui lòng chọn tình trạng tinh thần.',
+            'other.has_drug_allergy.required' => 'Vui lòng chọn tiền sử dị ứng thuốc.',
+            'other.drug_allergy_detail.required_if' => 'Vui lòng nhập loại thuốc dị ứng.',
+            'other.has_sensory_impairment.required' => 'Vui lòng chọn tình trạng giác quan.',
+            'other.has_incontinence.required' => 'Vui lòng chọn tình trạng tiểu không tự chủ.',
+            'other.has_pressure_ulcer_risk.required' => 'Vui lòng chọn nguy cơ loét.',
+            'other.has_caregiver.required' => 'Vui lòng chọn tình trạng người chăm sóc.',
         ];
     }
 
@@ -130,6 +144,12 @@ class AssessmentStoreRequest extends FormRequest
             'morse.ho_tro_di_lai' => 'Hỗ trợ đi lại',
             'morse.bat_thuong_di_chuyen' => 'Bất thường di chuyển',
             'morse.tinh_trang_tinh_than' => 'Tình trạng tinh thần',
+            'other.has_drug_allergy' => 'Dị ứng thuốc',
+            'other.drug_allergy_detail' => 'Loại thuốc dị ứng',
+            'other.has_sensory_impairment' => 'Giác quan',
+            'other.has_incontinence' => 'Tiểu không tự chủ',
+            'other.has_pressure_ulcer_risk' => 'Nguy cơ loét',
+            'other.has_caregiver' => 'Người chăm sóc',
         ];
     }
 }

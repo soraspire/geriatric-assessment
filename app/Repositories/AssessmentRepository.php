@@ -18,6 +18,7 @@ class AssessmentRepository implements AssessmentRepositoryInterface
             $assessment->mnaDetail()->create($data['mna']);
             $assessment->cfsDetail()->create($data['cfs']);
             $assessment->morseDetail()->create($data['morse']);
+            $assessment->otherDetail()->create($data['other']);
             
             return $assessment;
         });
@@ -30,7 +31,8 @@ class AssessmentRepository implements AssessmentRepositoryInterface
             'minicogDetail', 
             'mnaDetail', 
             'cfsDetail', 
-            'morseDetail'
+            'morseDetail',
+            'otherDetail'
         ])->first();
     }
 
